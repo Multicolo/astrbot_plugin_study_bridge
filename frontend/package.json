@@ -1,0 +1,27 @@
+{
+  "name": "study-bridge-frontend",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "test:e2e": "playwright test"
+  },
+  "dependencies": {
+    "echarts": "^5.5.1",
+    "lucide-vue-next": "^1.0.0",
+    "pinia": "^2.2.6",
+    "vue": "^3.5.13",
+    "vue-router": "^4.4.5"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.49.0",
+    "@vitejs/plugin-legacy": "^6.1.1",
+    "@vitejs/plugin-vue": "^5.2.1",
+    "terser": "^5.51.2",
+    "typescript": "^5.6.3",
+    "vite": "^6.0.3"
+  }
+}

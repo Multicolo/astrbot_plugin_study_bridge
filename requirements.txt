@@ -1,0 +1,4 @@
+aiohttp>=3.9.0
+# cryptography 由 AstrBot 本体（>=4.24.2）保证已安装，这里显式声明以便独立运行与打包
+cryptography>=42.0.0
+tzdata>=2024.1; sys_platform == "win32"

@@ -1,0 +1,303 @@
+{
+  "http": {
+    "type": "object",
+    "description": "HTTP 服务（App / 网页访问）",
+    "collapsed": false,
+    "items": {
+      "enabled": {
+        "type": "bool",
+        "description": "启用 HTTP 服务",
+        "default": true,
+        "hint": "关闭后网页与 App 不可用，但 QQ 指令、推送、AI、计划拆解仍然全部可用（纯 QQ 模式）。",
+        "obvious_hint": true
+      },
+      "host": {
+        "type": "string",
+        "description": "监听地址",
+        "default": "0.0.0.0",
+        "hint": "0.0.0.0 表示同一局域网/公网可访问，安全风险由你用防火墙或反代控制；只想本机访问请填 127.0.0.1。",
+        "obvious_hint": true
+      },
+      "port": {
+        "type": "int",
+        "description": "监听端口",
+        "default": 6188,
+        "hint": "与 AstrBot 面板默认的 6185 错开。端口被占用时插件会打印 ERROR 并停止启动 HTTP，不会静默换端口。",
+        "obvious_hint": true
+      },
+      "public_base_url": {
+        "type": "string",
+        "description": "对外访问地址（选填）",
+        "default": "",
+        "hint": "例如 https://study.example.com 。填写后 /addr 指令会直接返回该地址，App 扫码/复制更省事。留空则按请求 Host 推断。"
+      },
+      "allowed_origins": {
+        "type": "list",
+        "description": "允许跨域的来源",
+        "default": ["*"],
+        "hint": "默认 * 仅适合本地调试。生产环境请填具体来源（如 https://study.example.com），否则任何网页都能带用户令牌访问接口。",
+        "obvious_hint": true
+      },
+      "rate_limit_per_minute": {
+        "type": "int",
+        "description": "单 IP 每分钟请求上限",
+        "default": 120,
+        "slider": { "min": 10, "max": 2000, "step": 10 }
+      },
+      "auth_fail_limit_per_minute": {
+        "type": "int",
+        "description": "单 IP 每分钟鉴权失败上限",
+        "default": 20,
+        "hint": "超过后该 IP 被封 10 分钟。",
+        "slider": { "min": 5, "max": 200, "step": 5 }
+      },
+      "max_body_bytes": {
+        "type": "int",
+        "description": "请求体大小上限（字节）",
+        "default": 262144,
+        "hint": "上传资料时正文也走这里，调大可支持更大的笔记文件。",
+        "slider": { "min": 4096, "max": 4194304, "step": 4096 }
+      }
+    }
+  },
+  "scope": {
+    "type": "object",
+    "description": "使用范围与主体模式",
+    "items": {
+      "allowed_qq": {
+        "type": "list",
+        "description": "允许使用指令的 QQ 号",
+        "default": [],
+        "hint": "留空 = 仅机器人主人可用（更安全）。填入 QQ 号后仅这些用户可用；群聊还需 allowed_groups 放行。",
+        "obvious_hint": true
+      },
+      "allowed_groups": {
+        "type": "list",
+        "description": "允许使用指令的群号",
+        "default": [],
+        "hint": "留空 = 群聊中仅机器人主人可用。填群号表示该群成员可用（仍受 allowed_qq 约束，二者为交集为空时的兜底关系见文档）。",
+        "obvious_hint": true
+      },
+      "group_mode": {
+        "type": "string",
+        "description": "群聊主体模式",
+        "default": "per_user",
+        "options": ["per_user", "per_group"],
+        "labels": ["每人独立（per_user）", "整群共用（per_group）"],
+        "subtitles": [
+          "同群两人数据互相不可见，推荐",
+          "同群所有人共用一份学习日程，适合小组作业"
+        ],
+        "hint": "per_user：群内每个成员各自一份数据；per_group：整群共用一份。",
+        "obvious_hint": true
+      }
+    }
+  },
+  "language": {
+    "type": "string",
+    "description": "回复语言",
+    "default": "zh-CN",
+    "options": ["zh-CN", "en-US"],
+    "labels": ["简体中文", "English"]
+  },
+  "default_timezone": {
+    "type": "string",
+    "description": "默认时区",
+    "default": "Asia/Shanghai",
+    "hint": "每个用户可用 /settings tz 覆盖。可填任意 IANA 时区名，如 Asia/Tokyo、Europe/Berlin。"
+  },
+  "notify": {
+    "type": "object",
+    "description": "推送设置",
+    "items": {
+      "early_brief_time": {
+        "type": "string",
+        "description": "早报时间（HH:MM）",
+        "default": "08:00"
+      },
+      "plan_nudge_time": {
+        "type": "string",
+        "description": "计划督促时间（HH:MM）",
+        "default": "21:00"
+      },
+      "weekly_report_weekday": {
+        "type": "int",
+        "description": "周报星期几（1=周一）",
+        "default": 1,
+        "slider": { "min": 1, "max": 7, "step": 1 }
+      },
+      "weekly_report_time": {
+        "type": "string",
+        "description": "周报时间（HH:MM）",
+        "default": "09:00"
+      },
+      "retry_max": {
+        "type": "int",
+        "description": "推送失败重试次数",
+        "default": 3,
+        "slider": { "min": 0, "max": 10, "step": 1 }
+      },
+      "default_remind_offsets": {
+        "type": "list",
+        "description": "默认提前提醒分钟数",
+        "default": [30, 0],
+        "hint": "新建任务未指定提醒时使用，例如 [30, 0] 表示提前 30 分钟和开始时各提醒一次。"
+      }
+    }
+  },
+  "ai": {
+    "type": "object",
+    "description": "AI 设置",
+    "items": {
+      "mode": {
+        "type": "string",
+        "description": "AI 模式",
+        "default": "astrbot",
+        "options": ["astrbot", "manual"],
+        "labels": ["使用 AstrBot 已配置的模型", "手动填写 OpenAI 兼容接口"],
+        "hint": "astrbot 模式不复制、不落库任何 Key；manual 模式的 Key 由 App 写入并加密保存。"
+      },
+      "provider_id": {
+        "type": "string",
+        "description": "默认对话模型",
+        "default": "",
+        "_special": "select_provider",
+        "hint": "留空则用 AstrBot 当前默认对话模型。"
+      },
+      "timeout_seconds": {
+        "type": "int",
+        "description": "单次 AI 请求超时（秒）",
+        "default": 60,
+        "slider": { "min": 10, "max": 300, "step": 5 }
+      },
+      "max_tool_rounds": {
+        "type": "int",
+        "description": "单次对话最多工具调用轮次",
+        "default": 6,
+        "slider": { "min": 1, "max": 12, "step": 1 }
+      },
+      "allow_principal_ai": {
+        "type": "bool",
+        "description": "允许普通用户使用 AI",
+        "default": true,
+        "hint": "关闭后只有机器人主人（owner 主体）能用 AI，其他主体退化为规则解析。"
+      }
+    }
+  },
+  "memory": {
+    "type": "object",
+    "description": "记忆适配器",
+    "items": {
+      "adapter_order": {
+        "type": "list",
+        "description": "适配器尝试顺序",
+        "default": ["generic_tool", "livingmemory", "none"],
+        "hint": "按顺序探测，首个 probe() 成功的使用；全部失败则降级 none（本地记忆照常工作）。可选值：generic_tool、livingmemory、file、none。",
+        "obvious_hint": true
+      },
+      "sync_mode": {
+        "type": "string",
+        "description": "同步方向",
+        "default": "upload_only",
+        "options": ["off", "upload_only", "bidirectional"],
+        "labels": ["完全关闭", "仅上行（学习→bot）", "双向（含 bot→学习）"],
+        "subtitles": [
+          "不向任何第三方记忆插件写入",
+          "默认，推荐",
+          "会把 bot 的聊天记忆读取并同步到 App（需你明确授权）"
+        ],
+        "hint": "选择 bidirectional 意味着本插件会读取 bot 侧记忆并展示在 App「记忆中心 · bot 记忆」。",
+        "obvious_hint": true
+      },
+      "budget_tokens": {
+        "type": "int",
+        "description": "记忆注入预算（token）",
+        "default": 1500,
+        "slider": { "min": 200, "max": 8000, "step": 100 }
+      },
+      "source_tag_prefix": {
+        "type": "string",
+        "description": "来源标记前缀",
+        "default": "[src:study:",
+        "hint": "写入远端记忆时附带的标记，用于防回环与对账。改这个值会导致旧的同步条目被当成外部条目。"
+      },
+      "file_adapter_path": {
+        "type": "string",
+        "description": "JSONL 落地路径（file 适配器）",
+        "default": "",
+        "hint": "留空则写入插件数据目录 memory_mirror.jsonl。仅当 adapter_order 含 file 时生效，默认关闭。"
+      },
+      "generic_tool": {
+        "type": "object",
+        "description": "通用 tool 映射",
+        "items": {
+          "write_tool": {
+            "type": "string",
+            "description": "写入工具名",
+            "default": "remember"
+          },
+          "search_tool": {
+            "type": "string",
+            "description": "检索工具名",
+            "default": "recall"
+          },
+          "write_arg": {
+            "type": "string",
+            "description": "写入工具的内容参数名",
+            "default": "text"
+          },
+          "search_arg": {
+            "type": "string",
+            "description": "检索工具的查询参数名",
+            "default": "query"
+          }
+        }
+      },
+      "livingmemory": {
+        "type": "object",
+        "description": "LivingMemory 适配",
+        "items": {
+          "allow_private_attrs": {
+            "type": "bool",
+            "description": "允许读取其 implementation 属性",
+            "default": true,
+            "hint": "LivingMemory 2.13.0 的记忆引擎入口是 plugin.initializer.memory_engine（非下划线但属实现细节）。关闭则只走 tool 通道或降级。"
+          },
+          "persona_id": {
+            "type": "string",
+            "description": "写入用的人格 ID（选填）",
+            "default": ""
+          }
+        }
+      }
+    }
+  },
+  "quota": {
+    "type": "object",
+    "description": "配额（单主体上限）",
+    "items": {
+      "max_tasks": {
+        "type": "int",
+        "description": "任务上限",
+        "default": 2000
+      },
+      "max_plans": {
+        "type": "int",
+        "description": "计划上限",
+        "default": 200
+      },
+      "max_notifications": {
+        "type": "int",
+        "description": "通知记录上限",
+        "default": 5000
+      }
+    }
+  },
+  "data_dir_override": {
+    "type": "string",
+    "description": "数据目录覆盖（调试用）",
+    "default": "",
+    "hint": "留空使用 AstrBot 官方目录 data/plugin_data/astrbot_plugin_study_bridge。填绝对路径可把数据放到别处（例如放到备份盘）。",
+    "invisible": false
+  }
+}

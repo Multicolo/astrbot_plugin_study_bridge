@@ -1,0 +1,59 @@
+# Python
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.coverage
+coverage.xml
+htmlcov/
+
+# Node
+node_modules/
+frontend/node_modules/
+frontend/dist/
+frontend/.vite/
+npm-debug.log*
+pnpm-debug.log*
+
+# 本地运行产物
+data/
+.smoke/
+.devdata/
+.e2e-data/
+.shots-data/
+.e2e-tmp/
+frontend/.shots.mjs
+*.db
+*.db-wal
+*.db-shm
+*.log
+web-test-report/
+playwright-report/
+test-results/
+
+# Android 构建中间产物与自用签名（签名文件不入库，正式发布请用你自己的 keystore）
+android/build/
+android/dist/
+android/*.jks
+
+# 编辑器与系统
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# 注意：web/ 是前端构建产物，随插件分发，**不能**忽略
+!web/
+!web/**
+
+# 私有交接文档（含部署地址、本机环境与排障记录，不入库）
+HANDOFF*.md
+
+# 交付物与本地测试产物
+dist/
+pytest-of-*/
+
+# 正式发布请替换自用签名
+android/*.jks
