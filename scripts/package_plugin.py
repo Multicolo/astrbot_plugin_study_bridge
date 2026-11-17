@@ -2,7 +2,7 @@
 """把插件打成可上架的 zip（≤16MB，见 docs/MARKETPLACE.md）。
 
 只包含运行所需文件：main.py / metadata.yaml / _conf_schema.json / requirements.txt /
-LICENSE / README.md / CHANGELOG.md / core/ / adapters/ / i18n/ / web/ / docs/
+LICENSE / README.md / CHANGELOG.md / logo.png / core/ / adapters/ / i18n/ / web/ / docs/
 
 显式排除：frontend/（源码）、tests/、.venv、node_modules、data、__pycache__。
 """
@@ -15,6 +15,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 INCLUDE_FILES = [
     "main.py",
+    "logo.png",
     "metadata.yaml",
     "_conf_schema.json",
     "requirements.txt",

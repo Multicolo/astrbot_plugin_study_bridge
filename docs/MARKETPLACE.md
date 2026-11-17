@@ -14,6 +14,7 @@
 | `desc` 支持多行 Markdown | ✅ | |
 | `astrbot_version` 版本区间 | ✅ `">=4.24.2,<5"` | 与 LivingMemory 2.13.0 对齐，避免"装了必崩" |
 | 通过 AstrBot Cloud 发布页提交（不是提 PR） | 已按该流程准备 | `https://cloud.astrbot.app/publish` |
+| 插件图标 | ✅ 仓库根目录 `logo.png`（256×256），AstrBot 自动读取 | `star_manager.py: logo_fname = "logo.png"` |
 | zip ≤ 16MB | ✅ 约 0.4 MB | `python scripts/package_plugin.py` 会打印大小 |
 | 不包含 `__pycache__` / `node_modules` / `.git` | ✅ 打包脚本显式排除 | `scripts/package_plugin.py` |
 | 插件可被禁用/卸载而不残留 | ✅ `terminate()` 取消调度、关 HTTP、关 DB | `main.py:terminate` |

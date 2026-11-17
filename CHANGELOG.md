@@ -2,6 +2,15 @@
 
 遵循 [Keep a Changelog](https://keepachangelog.com/zh-CN/1.1.0/)，版本号遵循语义化版本。
 
+## [1.1.4] - 2026-11-17
+
+### 变更
+
+- **插件图标**：新增仓库根目录 `logo.png`（256×256，暖光书桌），AstrBot 会用插件目录下的
+  `logo.png` 作为面板/插件列表里的图标（`star_manager.py` 的 `logo_fname`）。
+  打包脚本 `scripts/package_plugin.py` 现在会把它一起装进 zip。
+- 版本 1.1.3 → **1.1.4**（三处同步，安卓 versionCode 15）。除图标外无功能变化。
+
 ## [1.1.3] - 2026-11-17
 
 用户反馈「白屏时没有退出的地方，而且不要等三十秒才给界面」，同时 `upload_to_astrbot.ps1`
