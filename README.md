@@ -14,6 +14,8 @@
 
 ---
 
+> 🧭 **第一次用？看 [使用指南 docs/USAGE.md](docs/USAGE.md)**：安装 → 必改配置 → 绑手机 → 每天怎么用 → 排障，一篇写完。
+
 ## 直接下载
 
 | 产物 | 说明 |
@@ -332,6 +334,7 @@ make dev           # 独立调试服务 http://127.0.0.1:6188
 
 ## 文档
 
+[使用指南](docs/USAGE.md) ·
 [RESEARCH](docs/RESEARCH.md) ·
 [ARCHITECTURE](docs/ARCHITECTURE.md) ·
 [API](docs/API.md) ·
