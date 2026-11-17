@@ -36,7 +36,7 @@ from .scheduler import Scheduler
 from .util import iso, utcnow
 
 PLUGIN_NAME = "astrbot_plugin_study_bridge"
-PLUGIN_VERSION = "1.1.4"
+PLUGIN_VERSION = "1.1.5"
 MIN_ASTRBOT_VERSION = "4.24.2"
 
 _current_event: contextvars.ContextVar[Any] = contextvars.ContextVar(

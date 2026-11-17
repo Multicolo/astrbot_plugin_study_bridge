@@ -88,7 +88,7 @@
 安装成功的标志（日志）：
 
 ```
-学习桥梁已就绪（v1.1.4）
+学习桥梁已就绪（v1.1.5）
 学习桥梁 HTTP 服务已监听 http://0.0.0.0:6188/study/
 ```
 
@@ -141,7 +141,7 @@ services:
 ```bash
 docker compose -f docker-compose.yml -f docker-compose.study.yml up -d
 docker port astrbot                 # 应出现 6188/tcp -> 127.0.0.1:6188
-curl -s http://127.0.0.1:6188/api/study/health   # {"version":"1.1.4"}
+curl -s http://127.0.0.1:6188/api/study/health   # {"version":"1.1.5"}
 ```
 
 ### nginx 反代片段（HTTPS）
@@ -171,7 +171,7 @@ location /api/study/ {
 ### 自检命令（不用装 App 就能确认服务端）
 
 ```bash
-curl -s http://<地址>:6188/api/study/health     # {"ok":true,...,"version":"1.1.4"}
+curl -s http://<地址>:6188/api/study/health     # {"ok":true,...,"version":"1.1.5"}
 curl -s -o /dev/null -w '%{http_code}\n' http://<地址>:6188/study/   # 200
 ```
 
@@ -184,7 +184,7 @@ curl -s -o /dev/null -w '%{http_code}\n' http://<地址>:6188/study/   # 200
 网页/App 打开后是「绑定与安装自检」页，按顺序：
 
 1. **填服务地址**：App 里首次启动就填；网页版通常留空（同源）。
-2. **测试连接** → 应显示「连接正常 · 插件 1.1.4」。
+2. **测试连接** → 应显示「连接正常 · 插件 1.1.5」。
 3. **生成绑定码** → 得到一个 **6 位数字，5 分钟内有效、只能用一次**。
 4. 到 QQ **私聊**机器人发送：`/bind 123456`（群里发会被拒绝，避免令牌泄露）。
 5. App/网页会自动轮询完成绑定，然后进入「今日」。
@@ -224,7 +224,7 @@ curl -s -o /dev/null -w '%{http_code}\n' http://<地址>:6188/study/   # 200
 
 ## 8. 安卓 App 怎么用
 
-1. 下载 [dist/StudyBridge.apk](../dist/StudyBridge.apk)（v1.1.4，versionCode 15，minSdk 24）。
+1. 下载 [dist/StudyBridge.apk](../dist/StudyBridge.apk)（v1.1.5，versionCode 16，minSdk 24）。
 2. 传到手机安装（允许「安装未知来源应用」）。
 3. 打开 → 填地址（如 `http://192.168.1.10:6188`）→ **连接** → 生成绑定码 → QQ `/bind`。
 

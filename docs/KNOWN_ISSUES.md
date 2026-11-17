@@ -2,7 +2,7 @@
 
 > 原则：**没有验证过的不写"已验证"**。下面每条都写清「为什么没做」「怎么绕」「真机怎么验」。
 
-环境事实（2026-11-17，1.1.4 时更新）：本机 **没有** AstrBot 运行时、没有 QQ 平台、没有 Rust、没有 macOS、
+环境事实（2026-11-17，1.1.5 时更新）：本机 **没有** AstrBot 运行时、没有 QQ 平台、没有 Rust、没有 macOS、
 没有实体安卓手机；**有** Android SDK（emulator 37.x + android-34/google_apis/x86_64 镜像，AEHD 可加速）与 JDK 17，因此安卓端可以真跑模拟器（含 Android 7.0 的旧 WebView）；
 Node 用 DSH 自带版本（v24.x + pnpm），不装全局。
 
@@ -48,15 +48,15 @@ Node 用 DSH 自带版本（v24.x + pnpm），不装全局。
 
 ### 4. Windows（Tauri）打包与 iOS
 
-- **Android（1.1.4）**：`android/build_apk.ps1` 用本机 Android SDK（build-tools 34.0.0 + platform 34）
-  免 Gradle 打包，产出 `dist/StudyBridge.apk`（32.8 KB / v1.1.4 / versionCode 15），
+- **Android（1.1.5）**：`android/build_apk.ps1` 用本机 Android SDK（build-tools 34.0.0 + platform 34）
+  免 Gradle 打包，产出 `dist/StudyBridge.apk`（517.8 KB / v1.1.5 / versionCode 16），
   `aapt2 dump badging` 与 `apksigner verify` 均通过。
   **已在安卓模拟器上逐屏实测**：
   - Android 14 / WebView Chrome 113：首次配置 → 连接 → 绑定页 → 今日 → 设置 → 换服务器地址 →
     诊断页（25 秒超时 / ERR_CONNECTION_REFUSED）→ 换回好地址恢复；
   - Android 7.0 / 系统自带旧内核（切到 `com.google.android.webview`，Chrome/53.0.2785.124，
     没有 `type=module`、没有 `AbortController`、没有 flex `gap`）：页面走 legacy 包正常渲染，
-    测试连接返回「连接正常 · 插件 1.1.4」，生成绑定码可得 6 位码并倒计时，设置页能拉起原生的
+    测试连接返回「连接正常 · 插件 1.1.5」，生成绑定码可得 6 位码并倒计时，设置页能拉起原生的
     「换服务器地址」弹窗。
   - **仍未在实体手机上手测**（本机无实体设备）；真机差异主要在厂商 ROM 的 WebView 版本与网络策略。
 - **Windows 仍未产出**：`frontend/src-tauri/` 配置齐全，但本机没有 Rust 工具链。

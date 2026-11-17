@@ -14,7 +14,7 @@ desc: |
   - **无公网 IP 可用**：支持局域网、反代与内网穿透
 
   详细文档见仓库 `docs/`，App 使用说明见 `README.md`。
-version: 1.1.4
+version: 1.1.5
 author: StudyBridge
 repo: https://github.com/Multicolo/astrbot_plugin_study_bridge
 astrbot_version: ">=4.24.2,<5"

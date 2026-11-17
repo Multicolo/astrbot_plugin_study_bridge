@@ -2,6 +2,19 @@
 
 遵循 [Keep a Changelog](https://keepachangelog.com/zh-CN/1.1.0/)，版本号遵循语义化版本。
 
+## [1.1.5] - 2026-11-17
+
+### 变更
+
+- **统一图标**：同一张暖光书桌照片现在同时用于三个入口
+  - AstrBot 插件图标：仓库根目录 `logo.png`（256×256）；
+  - 安卓启动器：`android/res/mipmap-*/ic_launcher*.png` + 自适应图标
+    （`mipmap-anydpi-v26/ic_launcher.xml`、`ic_launcher_foreground.png`、`values/colors.xml`），
+    同时补了 `android:roundIcon`；
+  - 网页 favicon：`frontend/public/favicon.png` / `apple-touch-icon.png` / `icon-512.png`，
+    `index.html` 里加了 `<link rel="icon">` 与 `apple-touch-icon`。
+- 版本 1.1.4 → **1.1.5**（三处同步，安卓 versionCode 16）。除图标外无功能变化。
+
 ## [1.1.4] - 2026-11-17
 
 ### 变更
