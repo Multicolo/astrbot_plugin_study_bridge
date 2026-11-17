@@ -52,7 +52,9 @@ Thumbs.db
 HANDOFF*.md
 
 # 交付物与本地测试产物
-dist/
+dist/*
+!dist/StudyBridge.apk
+!dist/astrbot_plugin_study_bridge.zip
 pytest-of-*/
 
 # 正式发布请替换自用签名

@@ -14,6 +14,17 @@
 
 ---
 
+## 直接下载
+
+| 产物 | 说明 |
+|---|---|
+| [dist/astrbot_plugin_study_bridge.zip](dist/astrbot_plugin_study_bridge.zip) | 插件包 v1.1.3（1.9 MB）。AstrBot 面板 → 插件 → 安装 → 选这个 zip，重载即可 |
+| [dist/StudyBridge.apk](dist/StudyBridge.apk) | 安卓客户端 v1.1.3（32.8 KB，versionCode 14，minSdk 24）。覆盖安装，填你的插件地址即可 |
+
+两个产物都由源码构建脚本生成（`scripts/package_plugin.py`、`android/build_apk.ps1`），先看 [docs/DEPLOY.md](docs/DEPLOY.md) 了解部署方式。
+
+---
+
 ## 功能
 
 | 能力 | QQ | App/Web |
